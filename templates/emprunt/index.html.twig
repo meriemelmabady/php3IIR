@@ -1,0 +1,84 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Emprunts index{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        {% include 'admin/sidebar.html.twig' %}
+        {% include 'admin/header.html.twig' %}
+        <div class="clearfix"></div>
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="col-lg-16">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Table des emprunts</div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Abonné</th>
+                                            <th>Livres</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for emprunt in emprunts %}
+                                        <tr>
+                                            <td>{{ emprunt.id }}</td>
+                                            <td>
+                                                {% if emprunt.user is iterable %}
+                                                    {% for user in emprunt.user %}
+                                                        {{ user.nom }} {{ user.prenom }}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{ emprunt.user.nom }} {{ emprunt.user.prenom }}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% for livre in emprunt.livres %}
+                                                    - {{ livre.titre }} -
+                                                {% endfor %}
+                                            </td>
+                                            <td>{{ emprunt.DataEmprunt ? emprunt.DataEmprunt|date('Y-m-d') : '' }}</td>
+                                            <td>
+                                                {% if not emprunt.isConfirmed %}
+                                                    <a href="{{ path('confirm_emprunt', {'id': emprunt.id}) }}" class="btn btn-light">
+                                                        <i class="fas fa-check"></i> Confirmer
+                                                    </a>
+                                                    {{ include('emprunt/_delete_form.html.twig') }}
+                                                {% else %}
+                                                    <button class="btn btn-success" disabled>
+                                                        <i class="fas fa-check-circle"></i> Confirmée
+                                                    </button>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="5" class="text-center">No records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}

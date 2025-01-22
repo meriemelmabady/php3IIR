@@ -1,0 +1,64 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Livre{% endblock %}
+
+{% block body %}
+  <!-- Start wrapper-->
+  <div id="wrapper">
+    
+    {% include 'admin/sidebar.html.twig' %}
+    {% include 'admin/header.html.twig' %}
+
+<div class="clearfix"></div>	
+<div class="content-wrapper">
+<div class="container-fluid">
+<div class="col-lg-16">
+<div class="card">
+<div class="card-body">
+<div class="card-title"> Information sur livre : </div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ livre.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ livre.titre }}</td>
+            </tr>
+            <tr>
+                <th>NbPages</th>
+                <td>{{ livre.nbPages }}</td>
+            </tr>
+            <tr>
+                <th>DateEdition</th>
+                <td>{{ livre.dateEdition ? livre.dateEdition|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NbExemplaire</th>
+                <td>{{ livre.nbExemplaire }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ livre.prix }}</td>
+            </tr>
+            <tr>
+                <th>Isbn</th>
+                <td>{{ livre.isbn }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('livre_index') }}" class="btn btn-info">Retour</a>
+
+    <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-warning">Modifier</a>
+
+    {{ include('livre/_delete_form.html.twig') }}
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

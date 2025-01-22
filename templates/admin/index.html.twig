@@ -1,0 +1,175 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %} Admin Index {% endblock %}
+
+{% block body %}
+<!-- Start wrapper-->
+<div id="wrapper">
+    {% include 'admin/sidebar.html.twig' %}
+    {% include 'admin/header.html.twig' %}
+
+    <div class="clearfix"></div>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!--Start Dashboard Content-->
+            <div class="row mt-3">
+                <!-- Users Card -->
+                <div class="col-12 col-lg-6 col-xl-3">
+                    <div class="card gradient-scooter">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <p class="text-white">Total Users</p>
+                                    <h4 class="text-white">{{ users_count }}</h4>
+                                    <p class="text-white">Active Members</p>
+                                </div>
+                                <div class="w-circle-icon rounded-circle border border-white">
+                                    <i class="fa fa-users text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Books Card -->
+                <div class="col-12 col-lg-6 col-xl-3">
+                    <div class="card gradient-bloody">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <p class="text-white">Total Books</p>
+                                    <h4 class="text-white">{{ books_count }}</h4>
+                                    <p class="text-white">In Library</p>
+                                </div>
+                                <div class="w-circle-icon rounded-circle border border-white">
+                                    <i class="fa fa-book text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emprunts Card -->
+                <div class="col-12 col-lg-6 col-xl-3">
+                    <div class="card gradient-blooker">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <p class="text-white">Active Loans</p>
+                                    <h4 class="text-white">{{ emprunts_count }}</h4>
+                                    <p class="text-white">Current Borrowings</p>
+                                </div>
+                                <div class="w-circle-icon rounded-circle border border-white">
+                                    <i class="fa fa-bookmark text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Card -->
+                <div class="col-12 col-lg-6 col-xl-3">
+                    <div class="card gradient-ohhappiness">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <p class="text-white">Categories</p>
+                                    <h4 class="text-white">{{ categories_count }}</h4>
+                                    <p class="text-white">Book Categories</p>
+                                </div>
+                                <div class="w-circle-icon rounded-circle border border-white">
+                                    <i class="fa fa-tags text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Recent Activities
+                            <div class="card-action">
+                                <div class="dropdown">
+                                    <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                                        <i class="icon-options"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{{ path('emprunt_index') }}">View All Loans</a>
+                                        <a class="dropdown-item" href="#">Export Data</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Book</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for emprunt in recent_emprunts %}
+                                    <tr>
+                                        <td>
+                                            {% if emprunt.user is iterable %}
+                                                {% for user in emprunt.user %}
+                                                    {{ user.nom }} {{ user.prenom }}
+                                                {% endfor %}
+                                            {% else %}
+                                                {{ emprunt.user.nom }} {{ emprunt.user.prenom }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% for livre in emprunt.livres %}
+                                                {{ livre.titre }}{% if not loop.last %}, {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{ emprunt.DataEmprunt|date('Y-m-d') }}</td>
+                                        <td>
+                                            {% if emprunt.isConfirmed %}
+                                                <span class="badge badge-success">Confirmed</span>
+                                            {% else %}
+                                                <span class="badge badge-warning">Pending</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Dashboard Content-->
+
+            <!--start overlay-->
+            <div class="overlay toggle-menu"></div>
+            <!--end overlay-->
+        </div>
+        <!-- End container-fluid-->
+    </div>
+    <!--End content-wrapper-->
+
+    <!--Start Back To Top Button-->
+    <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <!--End Back To Top Button-->
+</div>
+<!--End wrapper-->
+
+<!--Start footer-->
+<footer class="footer">
+    <div class="container">
+        <div class="text-center">
+            Copyright © 2018 Dashtreme Admin
+        </div>
+    </div>
+</footer>
+<!--End footer-->
+{% endblock %}

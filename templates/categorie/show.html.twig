@@ -1,0 +1,44 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <!-- Start wrapper-->
+    <div id="wrapper">
+        
+        {% include 'admin/sidebar.html.twig' %}
+        {% include 'admin/header.html.twig' %}
+
+        <div class="clearfix"></div>	
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <div class="col-lg-16">
+                        <div class="card">
+                        <div class="card-body">
+                        <div class="card-title"> Information sur la categorie : </div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ categorie.designation }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ categorie.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('categorie_index') }}" class="btn btn-info">Retour</a>
+
+    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class="btn btn-warning">Modifier</a>
+
+    {{ include('categorie/_delete_form.html.twig') }}
+    </div></div></div>
+    </div></div></div>
+{% endblock %}

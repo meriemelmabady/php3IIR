@@ -1,0 +1,82 @@
+{% extends 'user-base.html.twig' %}
+
+{% block title %}Cart | E-Library{% endblock %}
+
+{% block body %}
+{% include 'home/header.html.twig' %}
+{% include 'home/search_area.html.twig' %}
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Choose & Borrow</p>
+						<h1>Cart</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+	<!-- cart -->
+	<div class="cart-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+					<div class="cart-table-wrap">
+						<table class="cart-table">
+							<thead class="cart-table-head">
+								<tr class="table-head-row">
+									<th class="product-remove"></th>
+									<th class="product-image">Book Image</th>
+									<th class="product-name">Title</th>
+									<th class="product-name">ISBN</th>
+									<th class="product-name">Number of Pages</th>
+									<th class="product-price">Quantity</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								{% for element in dataPanier %}
+								<tr class="table-body-row">
+									<td class="product-remove"><a href="{{path('cart_delete', {id: element.livre.id})}}"><i class="far fa-window-close"></i></a></td>
+									<td class="product-image"><img src="/images/livres/{{ element.livre.filename }}" alt=""></td>
+									<td class="product-name">{{element.livre.titre}}</td>
+									<td class="product-name">{{element.livre.isbn}}</td>
+									<td class="product-name">{{element.livre.nbPages}}</td>
+									<td class="product-price">{{ element.quantite }}</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="10" class="text-center"><label> <h3> Your cart is empty !</h3> </label></td>
+								</tr>
+							{% endfor %}
+							
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="total-section">
+						
+						<div class="cart-buttons">
+							<a href="{{ path('cart_index') }}" class="boxed-btn">Update Cart</a>
+							<a href="{{ path('emprunter') }}" class="boxed-btn black">Emprunter</a>
+						</div>
+					</div>
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end cart -->
+	<!-- logo carousel -->
+		{% include 'home/sponsors_logo.html.twig' %}
+	<!-- end logo carousel -->
+  {% include 'home/footer.html.twig' %}
+  {% include 'home/copyrights.html.twig' %}
+{% endblock %}

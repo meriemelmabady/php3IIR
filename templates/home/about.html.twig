@@ -1,0 +1,56 @@
+{% extends 'user-base.html.twig' %}
+
+{% block title %}About Us - E-Library{% endblock %}
+
+{% block body %}
+    {% include 'home/header.html.twig' %}
+
+    <!-- breadcrumb-section -->
+    <div class="breadcrumb-section breadcrumb-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="breadcrumb-text">
+                        <p>Learn more about us</p>
+                        <h1>About E-Library</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end breadcrumb section -->
+
+    <!-- about section -->
+    <div class="mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-img">
+                        <img src="/images/about-img.jpg" alt="About Us Image" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-text">
+                        <h2>Welcome to <span class="orange-text">E-Library</span></h2>
+                        <p>Welcome to E-Library, your premier destination for digital literature and academic resources. Founded with the vision of making knowledge accessible to everyone, our platform offers an extensive collection of books across various genres and academic disciplines.</p>
+                        <p>Our mission is to bridge the gap between readers and quality literature by providing an easy-to-use digital platform that allows users to borrow and read books from anywhere, at any time.</p>
+                        <div class="about-features mt-5">
+                            <h4>Why Choose Us?</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check"></i> Extensive Digital Collection</li>
+                                <li><i class="fas fa-check"></i> 24/7 Customer Support</li>
+                                <li><i class="fas fa-check"></i> Easy Borrowing Process</li>
+                                <li><i class="fas fa-check"></i> Regular New Additions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end about section -->
+
+    {% include 'home/sponsors_logo.html.twig' %}
+    {% include 'home/footer.html.twig' %}
+    {% include 'home/copyrights.html.twig' %}
+{% endblock %}

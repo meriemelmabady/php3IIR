@@ -1,0 +1,53 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Editeur{% endblock %}
+
+{% block body %}
+  <!-- Start wrapper-->
+    <div id="wrapper">
+    
+        {% include 'admin/sidebar.html.twig' %}
+        {% include 'admin/header.html.twig' %}
+    
+    <div class="clearfix"></div>	
+    <div class="content-wrapper">
+    <div class="container-fluid">
+    <div class="col-lg-16">
+    <div class="card">
+    <div class="card-body">
+    <div class="card-title">information sur l'editeur : </div>
+            
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ editeur.id }}</td>
+            </tr>
+            <tr>
+                <th>NomEditeur</th>
+                <td>{{ editeur.nomEditeur }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ editeur.pays }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ editeur.address }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ editeur.telephone }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('editeur_index') }}" class="btn btn-info" >Retour</a>
+
+    <a href="{{ path('editeur_edit', {'id': editeur.id}) }}" class="btn btn-warning">Modifier</a>
+
+    {{ include('editeur/_delete_form.html.twig') }}
+    </div></div></div>
+    </div></div></div>
+{% endblock %}

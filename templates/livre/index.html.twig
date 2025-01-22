@@ -1,0 +1,63 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Livre index{% endblock %}
+
+{% block body %}
+    <!-- Start wrapper-->
+    <div id="wrapper">
+    
+        {% include 'admin/sidebar.html.twig' %}
+        {% include 'admin/header.html.twig' %}
+    
+        <div class="clearfix"></div>	
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <div class="col-lg-16">
+                        <div class="card">
+                           <div class="card-body">
+                            <div class="card-title">Tables de livres :</div>
+    <div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>NbPages</th>
+                <th>DateEdition</th>
+                <th>NbExemplaire</th>
+                <th>Prix</th>
+                <th>Isbn</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for livre in livres %}
+            <tr>
+                <td>{{ livre.id }}</td>
+                <td>{{ livre.titre[:30] }} ...</td>
+                <td>{{ livre.nbPages }}</td>
+                <td>{{ livre.dateEdition ? livre.dateEdition|date('Y-m-d') : '' }}</td>
+                <td>{{ livre.nbExemplaire }}</td>
+                <td>{{ livre.prix }}</td>
+                <td>{{ livre.isbn }}</td>
+                <td> <img src="/images/livres/{{ livre.filename }}" style="width: 50px;height:40px; border-radius:10%;"></td>
+
+
+                <td>
+                    <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn btn-light">show</a>
+                    <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-dark">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('livre_new') }}" class="btn btn-light btn-block"> Create new</a>
+    </div></div></div>
+    </div></div></div></div>
+{% endblock %}

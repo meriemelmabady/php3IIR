@@ -1,0 +1,57 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Auteur index{% endblock %}
+
+{% block body %}
+
+    <!-- Start wrapper-->
+    <div id="wrapper">
+    
+    {% include 'admin/sidebar.html.twig' %}
+    {% include 'admin/header.html.twig' %}
+
+    <div class="clearfix"></div>	
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="col-lg-16">
+                    <div class="card">
+                       <div class="card-body">
+                        <div class="card-title">Tables de auteurs :</div>
+
+            <div class="table-responsive">
+                    <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Prenom</th>
+                        <th>Nom</th>
+                        <th>Biographie</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for auteur in auteurs %}
+                    <tr>
+                        <td>{{ auteur.id }}</td>
+                        <td>{{ auteur.prenom }}</td>
+                        <td>{{ auteur.nom }}</td>
+                        <td>{{ auteur.biographie }}</td>
+                        <td>
+                            <a href="{{ path('auteur_show', {'id': auteur.id}) }}" class="btn btn-light" >show</a>
+                            <a href="{{ path('auteur_edit', {'id': auteur.id}) }}" class="btn btn-dark" >edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            <a href="{{ path('auteur_new') }}" class="btn btn-light btn-block" >Create new</a>
+            </div>
+            </div>
+        </div>
+        </div></div></div>
+{% endblock %}
